@@ -1,0 +1,174 @@
+:root {
+    --accent: #639187;
+    --black: #141208;
+    --hover: #f1f5f9;
+    --shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+body {
+    color: var(--black);
+    font-family: 'Work Sans', sans-serif;
+}
+
+/** utility classes **/
+.inner-container {
+    margin: auto;
+    max-width: 80rem;
+    padding: 0 1rem;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+/** typography **/
+h1,
+h2 {
+    font-weight: 300;
+}
+
+h1,
+li {
+    white-space: nowrap;
+}
+
+h2 {
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+}
+
+p,
+a {
+    font-size: 1.2rem;
+}
+
+/** navigation **/
+header {
+    position: relative;
+    box-shadow: var(--shadow);
+}
+
+header .inner-container {
+    height: 4.9rem;
+    padding: 0.5rem 1rem;
+}
+
+.toggle-btn {
+    background-color: unset;
+    border: none;
+    font-size: 0.825rem;
+}
+
+.toggle-btn svg {
+    display: block;
+    width: 2.75rem;
+}
+/** our header is 77px (4.8125rem) tall, so let's position the navigation that far down **/
+nav {
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    top: 4.9rem;
+    /** use percentages, not viewport width here. If you use 100vw, you will get a horizontal overflow, because it counts as a vertical scrollbar). **/
+    width: 100%;
+    z-index: 10;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    display: block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+nav a:hover,
+nav a:focus {
+    background-color: var(--hover);
+}
+/** hide the menu **/
+.collapsed {
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+}
+
+.is-active {
+    max-height: unset; /** or unset **/
+    opacity: 1;
+    visibility: visible;
+}
+
+/** main **/
+main {
+    background: url('../img/hero-sm.webp') center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 4.9rem);
+    padding: 1rem;
+}
+
+.hero {
+    max-width: 40rem;
+}
+
+@media (min-width: 720px) {
+    h2 {
+        font-size: 3.1875rem;
+    }
+    p {
+        font-size: 1.3125rem;
+
+    }
+
+    main {
+        background: url('../img/hero-lg.webp') center / cover no-repeat;
+    }
+
+}
+
+@media (min-width: 1080px) {
+    /** We have a lot of work cut out for us here because we need to undo a lot of things we above to hide our menu.  **/
+
+    /** first thing - let's hide the toggle btn */
+    .toggle-btn {
+        display: none;
+    }
+
+    nav.collapsed,
+    nav.is-active {
+        position: static;
+        visibility: visible;
+        opacity: 1;
+        max-height: unset;
+        background-color: transparent;
+        box-shadow: none;
+        width: unset;
+    }
+
+    nav ul {
+        display: flex;
+    }
+
+    /** The hover styles that looked/worked well in smaller views, don't look great on larger screens. So we're going to change them **/
+    nav a:hover,
+    nav a:focus {
+        background-color: unset;
+        color: var(--accent);
+        text-decoration: underline;
+    }
+
+    h2 {
+        font-size: 4rem;
+    }
+
+}
